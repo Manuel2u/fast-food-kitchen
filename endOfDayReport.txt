@@ -1,0 +1,17 @@
+Fast Food Kitchen End of Day Report
+
+Orders:
+
+Order 3 - Not Completed
+Hamburgers: 1
+Cheeseburgers: 1
+Veggieburgers: 1
+Sodas: 2
+To Go: false
+
+Item Totals:
+
+Hamburgers: 1
+Cheeseburgers: 1
+Veggieburgers: 1
+Sodas: 2
