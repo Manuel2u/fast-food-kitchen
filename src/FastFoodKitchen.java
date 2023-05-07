@@ -3,7 +3,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.nio.file.*;
-
+import java.util.List;
 
 
 /**
@@ -17,7 +17,9 @@ public class FastFoodKitchen {
     String line = "";
     String splitBy = ",";
 
-    private ArrayList<BurgerOrder> orderList = new ArrayList();
+    private ArrayList<BurgerOrder> orderList = new ArrayList<BurgerOrder>();
+    private ArrayList<BurgerOrder> completedOrderList = new ArrayList<BurgerOrder>();
+
 
     private static int nextOrderNum = 1;
 
@@ -26,6 +28,11 @@ public class FastFoodKitchen {
 
     // Append filename to path
     Path ordersFilePath = currentDir.resolve("src/burgerOrders.csv");
+
+    /**
+     * Constructor for Fast Food Kitchen class
+     * @throws Exception
+     */
 
     FastFoodKitchen() {
         try {
@@ -43,6 +50,8 @@ public class FastFoodKitchen {
                 boolean toGo = Boolean.parseBoolean(values[5]);
                 BurgerOrder order = new BurgerOrder(numHamburgers, numCheeseburgers, numVeggieburgers, numSodas, toGo, orderNum);
                 orderList.add(order);
+                System.out.println(order);
+                nextOrderNum = Math.max(nextOrderNum, orderNum + 1);
             }
             br.close();
         } catch (IOException e) {
@@ -50,14 +59,31 @@ public class FastFoodKitchen {
         }
     }
 
+
+    /**
+     * Gets Next order Number
+     * @return
+     */
     public static int getNextOrderNum() {
         return nextOrderNum;
     }
 
+    /**
+     * increases next order number
+     */
     private void incrementNextOrderNum() {
         nextOrderNum++;
     }
 
+    /**
+     *
+     * @param ham
+     * @param cheese
+     * @param veggie
+     * @param soda
+     * @param toGo
+     * @return
+     */
     public int addOrder(int ham, int cheese, int veggie, int soda, boolean toGo) {
         int orderNum = getNextOrderNum();
         orderList.add(new BurgerOrder(ham, cheese, veggie, soda, toGo, orderNum));
@@ -67,6 +93,11 @@ public class FastFoodKitchen {
 
     }
 
+    /**
+     *
+     * @param orderID
+     * @return
+     */
     public boolean isOrderDone(int orderID) {
         for (int i = 0; i < orderList.size(); i++) {
             if (orderList.get(i).getOrderNum() == orderID) {
@@ -76,6 +107,11 @@ public class FastFoodKitchen {
         return true;
     }
 
+    /**
+     * cancels order
+     * @param orderID
+     * @return
+     */
     public boolean cancelOrder(int orderID) {
         for (int i = 0; i < orderList.size(); i++) {
             if (orderList.get(i).getOrderNum() == orderID) {
@@ -86,10 +122,18 @@ public class FastFoodKitchen {
         return false;
     }
 
+    /**
+     * gets number of orders pending
+     * @return
+     */
     public int getNumOrdersPending() {
         return orderList.size();
     }
 
+    /**
+     * cancels last order
+     * @return
+     */
     public boolean cancelLastOrder() {
 
         if (!orderList.isEmpty()) { // same as  if (orderList.size() > 0)
@@ -100,6 +144,10 @@ public class FastFoodKitchen {
         return false;
     }
 
+    /**
+     * calls out order
+     * @param order
+     */
     private void orderCallOut(BurgerOrder order) {
         if (order.getNumCheeseburgers() > 0) {
             System.out.println("You have " + order.getNumHamburger() + " hamburgers");
@@ -116,6 +164,10 @@ public class FastFoodKitchen {
 
     }
 
+    /**
+     * completes a specific order
+     * @param orderID
+     */
     public void completeSpecificOrder(int orderID) {
         for (int i = 0; i < orderList.size(); i++) {
             if (orderList.get(i).getOrderNum() == orderID) {
@@ -123,6 +175,7 @@ public class FastFoodKitchen {
                 if (orderList.get(i).isOrderToGo()) {
                     orderCallOut(orderList.get(i));
                 }
+                completedOrderList.add(orderList.get(i)); // add completed order to the completed order list
                 orderList.remove(i);
             }
         }
@@ -149,6 +202,9 @@ public class FastFoodKitchen {
         return -1;
     }
 
+    /**
+     * generates end of the day report
+     */
     public void generateEndOfDayReport() {
         try {
             // Get current working directory
@@ -169,13 +225,24 @@ public class FastFoodKitchen {
 
             // Write order details to file
             bw.write("Orders:\n\n");
-            for (BurgerOrder order : orderList) {
+            for (int i = 0; i < orderList.size(); i++) {
+                BurgerOrder order = orderList.get(i);
                 bw.write("Order " + order.getOrderNum() + " - ");
-                if (isOrderDone(order.getOrderNum())) {
-                    bw.write("Completed\n");
-                } else {
-                    bw.write("Not Completed\n");
-                }
+                bw.write("Not Completed\n");
+                bw.write("Hamburgers: " + order.getNumHamburger() + "\n");
+                bw.write("Cheeseburgers: " + order.getNumCheeseburgers() + "\n");
+                bw.write("Veggieburgers: " + order.getNumVeggieburgers() + "\n");
+                bw.write("Sodas: " + order.getNumSodas() + "\n");
+                bw.write("To Go: " + order.isOrderToGo() + "\n");
+                bw.write("\n");
+            }
+
+            // Write completed order details to file
+            bw.write("Completed Orders:\n\n");
+            for (int i = 0; i < completedOrderList.size(); i++) {
+                BurgerOrder order = completedOrderList.get(i);
+                bw.write("Order " + order.getOrderNum() + " - ");
+                bw.write("Completed\n");
                 bw.write("Hamburgers: " + order.getNumHamburger() + "\n");
                 bw.write("Cheeseburgers: " + order.getNumCheeseburgers() + "\n");
                 bw.write("Veggieburgers: " + order.getNumVeggieburgers() + "\n");
@@ -190,7 +257,8 @@ public class FastFoodKitchen {
             int totalCheeseburgers = 0;
             int totalVeggieburgers = 0;
             int totalSodas = 0;
-            for (BurgerOrder order : orderList) {
+            for (int i = 0; i < completedOrderList.size(); i++) {
+                BurgerOrder order = completedOrderList.get(i);
                 totalHamburgers += order.getNumHamburger();
                 totalCheeseburgers += order.getNumCheeseburgers();
                 totalVeggieburgers += order.getNumVeggieburgers();
@@ -200,7 +268,6 @@ public class FastFoodKitchen {
             bw.write("Cheeseburgers: " + totalCheeseburgers + "\n");
             bw.write("Veggieburgers: " + totalVeggieburgers + "\n");
             bw.write("Sodas: " + totalSodas + "\n");
-
             // Close FileWriter and BufferedWriter
             bw.close();
             fw.close();
@@ -211,7 +278,20 @@ public class FastFoodKitchen {
         }
     }
 
+    private List<BurgerOrder> getCompletedOrders() {
+        List<BurgerOrder> completedOrders = new ArrayList<BurgerOrder>();
+        for (BurgerOrder order : orderList) {
+            if (isOrderDone(order.getOrderNum())) {
+                completedOrders.add(order);
+            }
+        }
+        return completedOrders;
+    }
 
+
+    /**
+     * generates updated csv file for orders
+     */
     public void generateUpdatedCsv() {
         // Write remaining orders to a new CSV file
         try {

@@ -19,7 +19,8 @@ public class FastFoodKitchenDriver {
 
         Scanner sc = new Scanner(System.in);
 
-        while (kitchen.getNumOrdersPending() != 0) {
+        try {
+            while (kitchen.getNumOrdersPending() != 0) {
             // see what the user wants to do
             System.out.println("Please select from the following menu of options, by typing a number:");
             System.out.println("\t 1. Order food");
@@ -49,6 +50,7 @@ public class FastFoodKitchenDriver {
                     }
                     int orderNum = kitchen.addOrder(ham, cheese, veggie, sodas, TOGO);
                     System.out.println("Thank you. Your order number is " + orderNum);
+                    System.out.println( kitchen.getOrderList());
                     System.out.println();
                     break;
                 case 2:
@@ -101,7 +103,16 @@ public class FastFoodKitchenDriver {
 
             } //end switch
 
+
         } //end while loop
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            kitchen.generateEndOfDayReport();
+            kitchen.generateUpdatedCsv();
+            sc.close();
+        }
     } // end main
 }// end class
 

@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="411aba95-3305-4a90-9137-7322c1974880" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/akwasi-project-3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/burgerOrders2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endOfDayReport.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BurgerOrder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FastFoodKitchen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FastFoodKitchenDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/burgerOrders.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/burgerOrders2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/burgerOrders2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endOfDayReport.txt" beforeDir="false" afterPath="$PROJECT_DIR$/endOfDayReport.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FastFoodKitchen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FastFoodKitchen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FastFoodKitchenDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FastFoodKitchenDriver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,14 +37,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
